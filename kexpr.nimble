@@ -4,6 +4,7 @@ version = "0.0.1"
 description   = "math expression evaluator library"
 author        = "Brent Pedersen"
 license       = "MIT"
+skipFiles     = @["tests.nim"]
 
 requires "nim >= 0.17.0"
 
@@ -23,3 +24,10 @@ task build, "build kexpr":
 before install:
     exec "rm -rf nimcache"
     exec "mkdir -p nimcache && cp kexpr-c.h nimcache/"
+
+before test:
+    exec "rm -rf nimcache"
+    exec "mkdir -p nimcache && cp kexpr-c.h nimcache/"
+
+task test, "tests":
+    exec "nim c -r tests.nim"

@@ -91,10 +91,6 @@ proc clear*(e:Expr) =
   if e.ke != nil:
     ke_unset(e.ke)
 
-proc set_float_vars*(e:Expr, vars:TableRef[string, float]=nil) {.inline.} =
-  if vars == nil: return
-  for k, v in vars:
-    discard ke_set_real(e.ke, k, cdouble(v))
 
 proc set_int_vars*(e:Expr, vars:TableRef[string, int]=nil) {.inline.} =
   if vars == nil: return
@@ -105,9 +101,18 @@ proc get_int*(e: Expr, vars: TableRef[string, int] = nil): int =
   e.set_int_vars(vars)
   return int(ke_eval_int(e.ke, e.err.addr))
 
+proc get_bool*(e: Expr, vars: TableRef[string, int] = nil): bool =
+  e.set_int_vars(vars)
+  return int(ke_eval_int(e.ke, e.err.addr)) == 1
+
+proc set_float_vars*(e:Expr, vars:TableRef[string, float]=nil) {.inline.} =
+  if vars == nil: return
+  for k, v in vars:
+    discard ke_set_real(e.ke, k, cdouble(v))
+
 proc get_float*(e: Expr, vars: TableRef[string, float] = nil): float =
   e.set_float_vars(vars)
-  return float(ke_eval_int(e.ke, e.err.addr))
+  return float(ke_eval_real(e.ke, e.err.addr))
 
 when isMainModule:
 
@@ -132,6 +137,5 @@ when isMainModule:
 
   e = expression("(sample1 > 20) & (sample2 > 10) & (sample3 < 40)")
   echo e.get_int({"sample1": 21, "sample2": 65, "sample3": 20}.newTable)
-  echo e.get_int({"sample1": 0, "sample2": 0, "sample3": 0}.newTable)
-
+  echo e.get_bool({"sample1": 0, "sample2": 0, "sample3": 0}.newTable)
 
