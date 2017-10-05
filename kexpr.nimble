@@ -5,29 +5,9 @@ description   = "math expression evaluator library"
 author        = "Brent Pedersen"
 license       = "MIT"
 skipFiles     = @["tests.nim"]
+#installFiles  = @["kexpr.nim", "kexpr-c.c", "kexpr-c.h"]
 
 requires "nim >= 0.17.0"
-
-bin = @["kexpr"]
-
-task run, "run the generated main":
-    exec "rm -rf nimcache"
-    exec "mkdir -p nimcache && cp kexpr-c.h nimcache/"
-    exec "nim c --passL:'-lm' kexpr.nim"
-    exec "./kexpr"
-
-task build, "build kexpr":
-    exec "rm -rf nimcache"
-    exec "mkdir -p nimcache && cp kexpr-c.h nimcache/"
-    exec "nim c --passL:'-lm' kexpr.nim"
-
-before install:
-    exec "rm -rf nimcache"
-    exec "mkdir -p nimcache && cp kexpr-c.h nimcache/"
-
-before test:
-    exec "rm -rf nimcache"
-    exec "mkdir -p nimcache && cp kexpr-c.h nimcache/"
 
 task test, "tests":
     exec "nim c -r tests.nim"

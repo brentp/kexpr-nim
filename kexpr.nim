@@ -1,4 +1,4 @@
-{.compile: "kexpr-c.c".}
+{.compile: "src/kexpr-c.c".}
 import tables
 
 type
@@ -32,40 +32,40 @@ const
 
 ##  parse an expression and return errors in $err
 
-proc ke_parse*(s: cstring; err: ptr cint): ptr kexpr_t {.importc, header:"kexpr-c.h".}
+proc ke_parse*(s: cstring; err: ptr cint): ptr kexpr_t {.importc:"ke_parse",cdecl.}
 ##  free memory allocated during parsing
 
-proc ke_destroy*(ke: ptr kexpr_t) {.importc, header:"kexpr-c.h".}
+proc ke_destroy*(ke: ptr kexpr_t) {.importc:"ke_destroy",cdecl.}
 ##  set a variable to integer value and return the occurrence of the variable
 
-proc ke_set_int*(ke: ptr kexpr_t; `var`: cstring; x: int64): cint {.importc, header:"kexpr-c.h".}
+proc ke_set_int*(ke: ptr kexpr_t; `var`: cstring; x: int64): cint {.importc:"ke_set_int", cdecl.}
 ##  set a variable to real value and return the occurrence of the variable
 
-proc ke_set_real*(ke: ptr kexpr_t; `var`: cstring; x: cdouble): cint {.importc, header:"kexpr-c.h".}
+proc ke_set_real*(ke: ptr kexpr_t; `var`: cstring; x: cdouble): cint {.importc:"ke_set_real", cdecl.}
 ##  set a variable to string value and return the occurrence of the variable
 
-proc ke_set_str*(ke: ptr kexpr_t; `var`: cstring; x: cstring): cint {.importc, header:"kexpr-c.h".}
+proc ke_set_str*(ke: ptr kexpr_t; `var`: cstring; x: cstring): cint {.importc:"ke_set_str", cdecl.}
 ##  set a user-defined function
 
 proc ke_set_real_func1*(ke: ptr kexpr_t; name: cstring;
-                       `func`: proc (a2: cdouble): cdouble): cint {.importc, header:"kexpr-c.h".}
+                       `func`: proc (a2: cdouble): cdouble): cint {.importc:"ke_set_real_func1", cdecl.}
 proc ke_set_real_func2*(ke: ptr kexpr_t; name: cstring;
-                       `func`: proc (a2: cdouble; a3: cdouble): cdouble): cint {.importc, header:"kexpr-c.h".}
+                       `func`: proc (a2: cdouble; a3: cdouble): cdouble): cint {.importc:"ke_set_real_func2", cdecl.}
 ##  set default math functions
 
-proc ke_set_default_func*(ke: ptr kexpr_t): cint {.importc, header:"kexpr-c.h".}
+proc ke_set_default_func*(ke: ptr kexpr_t): cint {.importc:"ke_set_default_func", cdecl.}
 ##  mark all variable as unset
 
-proc ke_unset*(e: ptr kexpr_t) {.importc, header:"kexpr-c.h".}
+proc ke_unset*(e: ptr kexpr_t) {.importc:"ke_unset", cdecl.}
 ##  evaluate expression; return error code; final value is returned via pointers
 
 proc ke_eval*(ke: ptr kexpr_t; i: ptr int64; r: ptr cdouble; s: cstringArray;
-             ret_type: ptr cint): cint {.importc, header:"kexpr-c.h".}
-proc ke_eval_int*(ke: ptr kexpr_t; err: ptr cint): int64 {.importc, header:"kexpr-c.h".}
-proc ke_eval_real*(ke: ptr kexpr_t; err: ptr cint): cdouble {.importc, header:"kexpr-c.h".}
+             ret_type: ptr cint): cint {.importc:"ke_eval", cdecl.}
+proc ke_eval_int*(ke: ptr kexpr_t; err: ptr cint): int64 {.importc:"ke_eval_int", cdecl.}
+proc ke_eval_real*(ke: ptr kexpr_t; err: ptr cint): cdouble {.importc:"ke_eval_real", cdecl.}
 ##  print the expression in Reverse Polish notation (RPN)
 
-proc ke_print*(ke: ptr kexpr_t) {.importc, header:"kexpr-c.h".}
+proc ke_print*(ke: ptr kexpr_t) {.importc:"ke_print", cdecl.}
 
 type 
   Expr* = ref object of RootObj
@@ -138,4 +138,3 @@ when isMainModule:
   e = expression("(sample1 > 20) & (sample2 > 10) & (sample3 < 40)")
   echo e.get_int({"sample1": 21, "sample2": 65, "sample3": 20}.newTable)
   echo e.get_bool({"sample1": 0, "sample2": 0, "sample3": 0}.newTable)
-
