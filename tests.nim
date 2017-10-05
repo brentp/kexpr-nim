@@ -40,9 +40,20 @@ proc `~=`(a, b: float): bool =
 suite "Eval test cases":
   for data in TestCases:
     let (expr, expected) = data
-    let e = expression(expr)
+    var e = expression(expr)
     discard ke_set_default_func(e.ke);
     check e.error() == 0
     echo expr, " got:", e.get_float, " expected:", expected, " ", e.get_float ~= expected
     check e.get_float() ~= expected
     e.clear()
+
+
+  var e = expression("2 > 1")
+  check e.get_bool()
+  e = expression("0.4")
+  check e.get_bool()
+  e = expression("0.0")
+  check (not e.get_bool())
+
+
+  quit(0)

@@ -1,6 +1,8 @@
 # kexpr-nim
 nim wrapper for Heng Li's kexpr math expression library
 
+[![badge](https://img.shields.io/badge/docs-latest-blue.svg)](https://brentp.github.io/kexpr-nim/)
+
 ```Nim
 var e = expression("5*6+x > 20")
 echo e.get_int({"x": 10}.newTable)
