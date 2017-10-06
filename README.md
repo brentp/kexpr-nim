@@ -19,3 +19,14 @@ echo e.get_int({"sample1": 21, "sample2": 65, "sample3": 20}.newTable) # 1
 echo e.get_int({"sample1": 0, "sample2": 0, "sample3": 0}.newTable) # 0
 assert e.error() == 0
 ```
+
+## installation
+
+If you have nimble installed you can do:
+
+```
+nimble install kexpr
+```
+
+[![nimble](https://raw.githubusercontent.com/yglukhov/nimble-tag/master/nimble.png)](https://github.com/nim-lang/nimble)
+
