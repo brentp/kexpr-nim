@@ -83,7 +83,7 @@ proc expression*(s: string): Expr =
   e.ke = ke_parse(s, e.err.addr)
   return e
 
-proc error*(e:Expr): int =
+proc error*(e:Expr): int {.inline.} =
   ## check the error value of the expression. non-zero values are errors.
   return int(e.err)
  
@@ -106,7 +106,7 @@ proc get_int*(e: Expr, vars: TableRef[string, int] = nil): int =
   e.set_int_vars(vars)
   return int(ke_eval_int(e.ke, e.err.addr))
 
-proc get_bool*(e: Expr): bool =
+proc get_bool*(e: Expr): bool {.inline.} =
   ## evaluate the epression and interpret the result as a bool
   return abs(ke_eval_real(e.ke, e.err.addr)) > 1e-8
 
