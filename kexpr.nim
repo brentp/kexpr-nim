@@ -87,7 +87,7 @@ proc error*(e:Expr): int {.inline.} =
   ## check the error value of the expression. non-zero values are errors.
   return int(e.err)
  
-proc clear*(e:Expr) =
+proc clear*(e:Expr) {.inline.} =
   ## clear the error state and empty the expression.
   e.err = 0
   if e.ke != nil:
