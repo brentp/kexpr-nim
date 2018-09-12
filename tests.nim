@@ -30,6 +30,7 @@ const
 
     ("log10(1000)", 3.0),
     ("10 > 20", 0.0),
+    ("(10 > 20)", 0.0),
     ("20 > 10", 1.0)
   ]
 
@@ -48,7 +49,7 @@ suite "Eval test cases":
     e.clear()
 
 
-  var e = expression("2 > 1")
+  var e = expression("(2 > 1)")
   check e.get_bool()
   e = expression("0.4")
   check e.get_bool()

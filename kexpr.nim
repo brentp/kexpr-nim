@@ -1,6 +1,6 @@
 ## kexpr evaluates math and boolean expressions
 
-{.compile: "src/kexpr-c.c".}
+{.compile: "kexpr/kexpr-c.c".}
 import tables
 
 type
@@ -147,6 +147,10 @@ when isMainModule:
   echo e.get_int({"x": -20}.newTable)
   assert e.error() == 0
 
+  e = expression("(value > 0)")
+  echo e.get_int({"value": 20}.newTable)
+  quit()
+
   e = expression("5.5*6.7+a/b")
   echo e.get_float({"x": 12.0, "b": 65.5}.newTable)
 
@@ -157,4 +161,4 @@ when isMainModule:
 
   e = expression("(sample1 > 20) & (sample2 > 10) & (sample3 < 40)")
   echo e.get_int({"sample1": 21, "sample2": 65, "sample3": 20}.newTable)
-  echo e.get_bool({"sample1": 0, "sample2": 0, "sample3": 0}.newTable)
+  echo e.get_bool()

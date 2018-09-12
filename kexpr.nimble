@@ -5,7 +5,7 @@ description   = "math expression evaluator library"
 author        = "Brent Pedersen"
 license       = "MIT"
 skipFiles     = @["tests.nim"]
-#installFiles  = @["kexpr.nim", "kexpr-c.c", "kexpr-c.h"]
+#installFiles  = @["src/kexpr.nim", "src/kexpr-c.c", "src/kexpr-c.h"]
 
 requires "nim >= 0.17.0"
 
