@@ -43,20 +43,20 @@ suite "Eval test cases":
     var e = expression(expr)
     echo ke_set_default_func(e.ke)
     check e.error() == 0
-    echo expr, " got:", e.get_float, " expected:", expected, " ", e.get_float ~= expected
-    check e.get_float() ~= expected
+    echo expr, " got:", e.float, " expected:", expected, " ", e.float ~= expected
+    check e.float() ~= expected
     e.clear()
 
 
   var e = expression("(2 > 1)")
-  check e.get_bool()
+  check e.bool()
   e = expression("0.4")
-  check e.get_bool()
+  check e.bool()
   e = expression("0.0")
-  check (not e.get_bool())
+  check (not e.bool())
 
 
   test "expression strings":
     e = expression("sval > aa22")
     e["sval"] = "asdf"
-    echo e.get_float
+    #echo e.float

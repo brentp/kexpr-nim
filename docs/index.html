@@ -1317,17 +1317,28 @@ function main() {
   <li><a class="reference" href="#clear%2CExpr"
     title="clear(e: Expr)"><wbr />clear<span class="attachedType" style="visibility:hidden">Expr</span></a></li>
   <li><a class="reference" href="#%5B%5D%3D%2CExpr%2Cstring%2C"
-    title="`[]=`(e: Expr; k: string; val: int or int32 or int64 or int8 or uint): cint"><wbr />`[]=`<span class="attachedType" style="visibility:hidden">Expr</span></a></li>
+    title="`[]=`(e: Expr; k: string;
+      val: int or int32 or int64 or int8 or uint or uint8 or uint16 or uint32): cint"><wbr />`[]=`<span class="attachedType" style="visibility:hidden">Expr</span></a></li>
   <li><a class="reference" href="#%5B%5D%3D%2CExpr%2Cstring%2C_2"
     title="`[]=`(e: Expr; k: string; val: float or float32 or float64): cint"><wbr />`[]=`<span class="attachedType" style="visibility:hidden">Expr</span></a></li>
   <li><a class="reference" href="#%5B%5D%3D%2CExpr%2Cstring%2Cstring"
     title="`[]=`(e: Expr; k: string; val: string): cint"><wbr />`[]=`<span class="attachedType" style="visibility:hidden">Expr</span></a></li>
-  <li><a class="reference" href="#get_int%2CExpr"
-    title="get_int(e: Expr): int"><wbr />get_<wbr />int<span class="attachedType" style="visibility:hidden">Expr</span></a></li>
-  <li><a class="reference" href="#get_bool%2CExpr"
-    title="get_bool(e: Expr): bool"><wbr />get_<wbr />bool<span class="attachedType" style="visibility:hidden">Expr</span></a></li>
-  <li><a class="reference" href="#get_float%2CExpr"
-    title="get_float(e: Expr): float"><wbr />get_<wbr />float<span class="attachedType" style="visibility:hidden">Expr</span></a></li>
+
+  </ul>
+</li>
+<li>
+  <a class="reference reference-toplevel" href="#16" id="66">Converters</a>
+  <ul class="simple simple-toc-section">
+      <li><a class="reference" href="#toInt.c%2CExpr"
+    title="toInt(e: Expr): int"><wbr />to<wbr />Int<span class="attachedType" style="visibility:hidden">Expr</span></a></li>
+  <li><a class="reference" href="#toInt64.c%2CExpr"
+    title="toInt64(e: Expr): int64"><wbr />to<wbr />Int64<span class="attachedType" style="visibility:hidden">Expr</span></a></li>
+  <li><a class="reference" href="#toBool.c%2CExpr"
+    title="toBool(e: Expr): bool"><wbr />to<wbr />Bool<span class="attachedType" style="visibility:hidden">Expr</span></a></li>
+  <li><a class="reference" href="#toFloat.c%2CExpr"
+    title="toFloat(e: Expr): float"><wbr />to<wbr />Float<span class="attachedType" style="visibility:hidden">Expr</span></a></li>
+  <li><a class="reference" href="#toFloat64.c%2CExpr"
+    title="toFloat64(e: Expr): float64"><wbr />to<wbr />Float64<span class="attachedType" style="visibility:hidden">Expr</span></a></li>
 
   </ul>
 </li>
@@ -1544,8 +1555,8 @@ clear the error state and empty the expression.
 
 </dd>
 <a id="[]=,Expr,string,"></a>
-<dt><pre><span class="Keyword">proc</span> <span class="Identifier">`[]=`</span><span class="Other">(</span><span class="Identifier">e</span><span class="Other">:</span> <a href="kexpr.html#Expr"><span class="Identifier">Expr</span></a><span class="Other">;</span> <span class="Identifier">k</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">val</span><span class="Other">:</span> <span class="Identifier">int</span> <span class="Keyword">or</span> <span class="Identifier">int32</span> <span class="Keyword">or</span> <span class="Identifier">int64</span> <span class="Keyword">or</span> <span class="Identifier">int8</span> <span class="Keyword">or</span> <span class="Identifier">uint</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">cint</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span>
-    <span class="Identifier">discardable</span></span><span class="Other">.}</span></span></pre></dt>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">`[]=`</span><span class="Other">(</span><span class="Identifier">e</span><span class="Other">:</span> <a href="kexpr.html#Expr"><span class="Identifier">Expr</span></a><span class="Other">;</span> <span class="Identifier">k</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">val</span><span class="Other">:</span> <span class="Identifier">int</span> <span class="Keyword">or</span> <span class="Identifier">int32</span> <span class="Keyword">or</span> <span class="Identifier">int64</span> <span class="Keyword">or</span> <span class="Identifier">int8</span> <span class="Keyword">or</span> <span class="Identifier">uint</span> <span class="Keyword">or</span> <span class="Identifier">uint8</span> <span class="Keyword">or</span> <span class="Identifier">uint16</span> <span class="Keyword">or</span>
+    <span class="Identifier">uint32</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">cint</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">discardable</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
 
@@ -1563,22 +1574,39 @@ clear the error state and empty the expression.
 
 
 </dd>
-<a id="get_int,Expr"></a>
-<dt><pre><span class="Keyword">proc</span> <span class="Identifier">get_int</span><span class="Other">(</span><span class="Identifier">e</span><span class="Other">:</span> <a href="kexpr.html#Expr"><span class="Identifier">Expr</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">int</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+
+</dl></div>
+<div class="section" id="16">
+<h1><a class="toc-backref" href="#16">Converters</a></h1>
+<dl class="item">
+<a id="toInt.c,Expr"></a>
+<dt><pre><span class="Keyword">converter</span> <span class="Identifier">toInt</span><span class="Other">(</span><span class="Identifier">e</span><span class="Other">:</span> <a href="kexpr.html#Expr"><span class="Identifier">Expr</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">int</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 evaluate the epression and interpret the result as an int.
 
 </dd>
-<a id="get_bool,Expr"></a>
-<dt><pre><span class="Keyword">proc</span> <span class="Identifier">get_bool</span><span class="Other">(</span><span class="Identifier">e</span><span class="Other">:</span> <a href="kexpr.html#Expr"><span class="Identifier">Expr</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<a id="toInt64.c,Expr"></a>
+<dt><pre><span class="Keyword">converter</span> <span class="Identifier">toInt64</span><span class="Other">(</span><span class="Identifier">e</span><span class="Other">:</span> <a href="kexpr.html#Expr"><span class="Identifier">Expr</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">int64</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dd>
+evaluate the epression and interpret the result as an int64.
+
+</dd>
+<a id="toBool.c,Expr"></a>
+<dt><pre><span class="Keyword">converter</span> <span class="Identifier">toBool</span><span class="Other">(</span><span class="Identifier">e</span><span class="Other">:</span> <a href="kexpr.html#Expr"><span class="Identifier">Expr</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 evaluate the epression and interpret the result as a bool
 
 </dd>
-<a id="get_float,Expr"></a>
-<dt><pre><span class="Keyword">proc</span> <span class="Identifier">get_float</span><span class="Other">(</span><span class="Identifier">e</span><span class="Other">:</span> <a href="kexpr.html#Expr"><span class="Identifier">Expr</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">float</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<a id="toFloat.c,Expr"></a>
+<dt><pre><span class="Keyword">converter</span> <span class="Identifier">toFloat</span><span class="Other">(</span><span class="Identifier">e</span><span class="Other">:</span> <a href="kexpr.html#Expr"><span class="Identifier">Expr</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">float</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
-evaluate the expression and interpret the result as a bool.
+evaluate the expression and interpret the result as a float.
+
+</dd>
+<a id="toFloat64.c,Expr"></a>
+<dt><pre><span class="Keyword">converter</span> <span class="Identifier">toFloat64</span><span class="Other">(</span><span class="Identifier">e</span><span class="Other">:</span> <a href="kexpr.html#Expr"><span class="Identifier">Expr</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">float64</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dd>
+evaluate the expression and interpret the result as a float64.
 
 </dd>
 
@@ -1591,7 +1619,7 @@ evaluate the expression and interpret the result as a bool.
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small>Made with Nim. Generated: 2018-12-10 21:55:34 UTC</small>
+        <small>Made with Nim. Generated: 2018-12-10 22:05:13 UTC</small>
       </div>
     </div>
   </div>

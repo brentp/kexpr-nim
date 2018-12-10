@@ -79,7 +79,6 @@ proc expression*(s: string): Expr =
   ## initalize an expression
   var e: Expr
   new(e, finalize_expr)
-  e = Expr(err:cint(0))
   e.ke = ke_parse(s, e.err.addr)
   return e
 
@@ -93,7 +92,7 @@ proc clear*(e:Expr) {.inline.} =
   if e.ke != nil:
     ke_unset(e.ke)
 
-proc `[]=`*(e:Expr, k:string, val:int or int32 or int64 or int8 or uint): cint {.inline, discardable.} =
+proc `[]=`*(e:Expr, k:string, val:int or int32 or int64 or int8 or uint or uint8 or uint16 or uint32): cint {.inline, discardable.} =
   return ke_set_int(e.ke, k, cint(val))
 
 proc `[]=`*(e:Expr, k:string, val:float or float32 or float64): cint {.inline, discardable.} =
@@ -102,14 +101,22 @@ proc `[]=`*(e:Expr, k:string, val:float or float32 or float64): cint {.inline, d
 proc `[]=`*(e:Expr, k:string, val:string): cint {.inline, discardable.} =
   return ke_set_str(e.ke, k, val)
 
-proc get_int*(e: Expr): int {.inline.} =
+converter toInt*(e: Expr): int {.inline.} =
   ## evaluate the epression and interpret the result as an int.
   return int(ke_eval_int(e.ke, e.err.addr))
 
-proc get_bool*(e: Expr): bool {.inline.} =
+converter toInt64*(e: Expr): int64 {.inline.} =
+  ## evaluate the epression and interpret the result as an int64.
+  return int64(ke_eval_int(e.ke, e.err.addr))
+
+converter toBool*(e: Expr): bool {.inline.} =
   ## evaluate the epression and interpret the result as a bool
   return abs(ke_eval_real(e.ke, e.err.addr)) > 1e-8
 
-proc get_float*(e: Expr): float {.inline.} =
-  ## evaluate the expression and interpret the result as a bool.
+converter toFloat*(e: Expr): float {.inline.} =
+  ## evaluate the expression and interpret the result as a float.
   return float(ke_eval_real(e.ke, e.err.addr))
+
+converter toFloat64*(e: Expr): float64 {.inline.} =
+  ## evaluate the expression and interpret the result as a float64.
+  return float64(ke_eval_real(e.ke, e.err.addr))
