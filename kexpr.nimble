@@ -1,6 +1,6 @@
 # Package
 
-version = "0.0.1"
+version = "0.0.2"
 description   = "math expression evaluator library"
 author        = "Brent Pedersen"
 license       = "MIT"
