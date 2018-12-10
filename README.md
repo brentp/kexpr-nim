@@ -17,7 +17,7 @@ assert e.error() != 0
 e.clear()
 
 e = expression("(sample1 > 20) & (sample2 > 10) & (sample3 < 40)")
-e["sample1"] = 21; e["sample2"] = 65' e["sample3"] = 20
+e["sample1"] = 21; e["sample2"] = 65; e["sample3"] = 20
 echo e.int # 1
 e["sample1"] = 0
 echo e.int # 0
