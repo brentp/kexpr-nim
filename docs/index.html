@@ -1318,11 +1318,11 @@ function main() {
     title="clear(e: Expr)"><wbr />clear<span class="attachedType" style="visibility:hidden">Expr</span></a></li>
   <li><a class="reference" href="#%5B%5D%3D%2CExpr%2Cstring%2C"
     title="`[]=`(e: Expr; k: string;
-      val: int or int32 or int64 or int8 or uint or uint8 or uint16 or uint32): cint"><wbr />`[]=`<span class="attachedType" style="visibility:hidden">Expr</span></a></li>
+      val: int or int32 or int64 or int8 or uint or uint8 or uint16 or uint32)"><wbr />`[]=`<span class="attachedType" style="visibility:hidden">Expr</span></a></li>
   <li><a class="reference" href="#%5B%5D%3D%2CExpr%2Cstring%2C_2"
-    title="`[]=`(e: Expr; k: string; val: float or float32 or float64): cint"><wbr />`[]=`<span class="attachedType" style="visibility:hidden">Expr</span></a></li>
+    title="`[]=`(e: Expr; k: string; val: float or float32 or float64)"><wbr />`[]=`<span class="attachedType" style="visibility:hidden">Expr</span></a></li>
   <li><a class="reference" href="#%5B%5D%3D%2CExpr%2Cstring%2Cstring"
-    title="`[]=`(e: Expr; k: string; val: string): cint"><wbr />`[]=`<span class="attachedType" style="visibility:hidden">Expr</span></a></li>
+    title="`[]=`(e: Expr; k: string; val: string)"><wbr />`[]=`<span class="attachedType" style="visibility:hidden">Expr</span></a></li>
 
   </ul>
 </li>
@@ -1463,21 +1463,21 @@ free memory allocated during parsing
 </dd>
 <a id="ke_set_int,ptr.kexpr_s,cstring,int64"></a>
 <dt><pre><span class="Keyword">proc</span> <span class="Identifier">ke_set_int</span><span class="Other">(</span><span class="Identifier">ke</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="kexpr.html#kexpr_t"><span class="Identifier">kexpr_t</span></a><span class="Other">;</span> <span class="Other">`</span><span class="Keyword">var</span><span class="Other">`</span><span class="Other">:</span> <span class="Identifier">cstring</span><span class="Other">;</span> <span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">int64</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">cint</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">importc</span><span class="Other">:</span> <span class="StringLit">&quot;ke_set_int&quot;</span><span class="Other">,</span>
-    <span class="Identifier">cdecl</span></span><span class="Other">.}</span></span></pre></dt>
+    <span class="Identifier">discardable</span><span class="Other">,</span> <span class="Identifier">cdecl</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 set a variable to integer value and return the occurrence of the variable
 
 </dd>
 <a id="ke_set_real,ptr.kexpr_s,cstring,cdouble"></a>
 <dt><pre><span class="Keyword">proc</span> <span class="Identifier">ke_set_real</span><span class="Other">(</span><span class="Identifier">ke</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="kexpr.html#kexpr_t"><span class="Identifier">kexpr_t</span></a><span class="Other">;</span> <span class="Other">`</span><span class="Keyword">var</span><span class="Other">`</span><span class="Other">:</span> <span class="Identifier">cstring</span><span class="Other">;</span> <span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">cdouble</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">cint</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma">
-    <span class="Identifier">importc</span><span class="Other">:</span> <span class="StringLit">&quot;ke_set_real&quot;</span><span class="Other">,</span> <span class="Identifier">cdecl</span></span><span class="Other">.}</span></span></pre></dt>
+    <span class="Identifier">importc</span><span class="Other">:</span> <span class="StringLit">&quot;ke_set_real&quot;</span><span class="Other">,</span> <span class="Identifier">discardable</span><span class="Other">,</span> <span class="Identifier">cdecl</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 set a variable to real value and return the occurrence of the variable
 
 </dd>
 <a id="ke_set_str,ptr.kexpr_s,cstring,cstring"></a>
 <dt><pre><span class="Keyword">proc</span> <span class="Identifier">ke_set_str</span><span class="Other">(</span><span class="Identifier">ke</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="kexpr.html#kexpr_t"><span class="Identifier">kexpr_t</span></a><span class="Other">;</span> <span class="Other">`</span><span class="Keyword">var</span><span class="Other">`</span><span class="Other">:</span> <span class="Identifier">cstring</span><span class="Other">;</span> <span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">cstring</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">cint</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma">
-    <span class="Identifier">importc</span><span class="Other">:</span> <span class="StringLit">&quot;ke_set_str&quot;</span><span class="Other">,</span> <span class="Identifier">cdecl</span></span><span class="Other">.}</span></span></pre></dt>
+    <span class="Identifier">importc</span><span class="Other">:</span> <span class="StringLit">&quot;ke_set_str&quot;</span><span class="Other">,</span> <span class="Identifier">discardable</span><span class="Other">,</span> <span class="Identifier">cdecl</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 set a variable to string value and return the occurrence of the variable
 
@@ -1556,20 +1556,19 @@ clear the error state and empty the expression.
 </dd>
 <a id="[]=,Expr,string,"></a>
 <dt><pre><span class="Keyword">proc</span> <span class="Identifier">`[]=`</span><span class="Other">(</span><span class="Identifier">e</span><span class="Other">:</span> <a href="kexpr.html#Expr"><span class="Identifier">Expr</span></a><span class="Other">;</span> <span class="Identifier">k</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">val</span><span class="Other">:</span> <span class="Identifier">int</span> <span class="Keyword">or</span> <span class="Identifier">int32</span> <span class="Keyword">or</span> <span class="Identifier">int64</span> <span class="Keyword">or</span> <span class="Identifier">int8</span> <span class="Keyword">or</span> <span class="Identifier">uint</span> <span class="Keyword">or</span> <span class="Identifier">uint8</span> <span class="Keyword">or</span> <span class="Identifier">uint16</span> <span class="Keyword">or</span>
-    <span class="Identifier">uint32</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">cint</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">discardable</span></span><span class="Other">.}</span></span></pre></dt>
+    <span class="Identifier">uint32</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
 
 </dd>
 <a id="[]=,Expr,string,_2"></a>
-<dt><pre><span class="Keyword">proc</span> <span class="Identifier">`[]=`</span><span class="Other">(</span><span class="Identifier">e</span><span class="Other">:</span> <a href="kexpr.html#Expr"><span class="Identifier">Expr</span></a><span class="Other">;</span> <span class="Identifier">k</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">val</span><span class="Other">:</span> <span class="Identifier">float</span> <span class="Keyword">or</span> <span class="Identifier">float32</span> <span class="Keyword">or</span> <span class="Identifier">float64</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">cint</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">discardable</span></span><span class="Other">.}</span></span></pre></dt>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">`[]=`</span><span class="Other">(</span><span class="Identifier">e</span><span class="Other">:</span> <a href="kexpr.html#Expr"><span class="Identifier">Expr</span></a><span class="Other">;</span> <span class="Identifier">k</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">val</span><span class="Other">:</span> <span class="Identifier">float</span> <span class="Keyword">or</span> <span class="Identifier">float32</span> <span class="Keyword">or</span> <span class="Identifier">float64</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
 
 </dd>
 <a id="[]=,Expr,string,string"></a>
-<dt><pre><span class="Keyword">proc</span> <span class="Identifier">`[]=`</span><span class="Other">(</span><span class="Identifier">e</span><span class="Other">:</span> <a href="kexpr.html#Expr"><span class="Identifier">Expr</span></a><span class="Other">;</span> <span class="Identifier">k</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">val</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">cint</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">discardable</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
-    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">`[]=`</span><span class="Other">(</span><span class="Identifier">e</span><span class="Other">:</span> <a href="kexpr.html#Expr"><span class="Identifier">Expr</span></a><span class="Other">;</span> <span class="Identifier">k</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">val</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
 
@@ -1619,7 +1618,7 @@ evaluate the expression and interpret the result as a float64.
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small>Made with Nim. Generated: 2018-12-10 22:05:13 UTC</small>
+        <small>Made with Nim. Generated: 2018-12-10 23:01:53 UTC</small>
       </div>
     </div>
   </div>

@@ -35,13 +35,13 @@ proc ke_parse*(s: cstring; err: ptr cint): ptr kexpr_t {.importc:"ke_parse",cdec
 proc ke_destroy*(ke: ptr kexpr_t) {.importc:"ke_destroy",cdecl.}
   ## free memory allocated during parsing
 
-proc ke_set_int*(ke: ptr kexpr_t; `var`: cstring; x: int64): cint {.importc:"ke_set_int", cdecl.}
+proc ke_set_int*(ke: ptr kexpr_t; `var`: cstring; x: int64): cint {.importc:"ke_set_int", discardable, cdecl.}
   ## set a variable to integer value and return the occurrence of the variable
 
-proc ke_set_real*(ke: ptr kexpr_t; `var`: cstring; x: cdouble): cint {.importc:"ke_set_real", cdecl.}
+proc ke_set_real*(ke: ptr kexpr_t; `var`: cstring; x: cdouble): cint {.importc:"ke_set_real", discardable, cdecl.}
   ## set a variable to real value and return the occurrence of the variable
 
-proc ke_set_str*(ke: ptr kexpr_t; `var`: cstring; x: cstring): cint {.importc:"ke_set_str", cdecl.}
+proc ke_set_str*(ke: ptr kexpr_t; `var`: cstring; x: cstring): cint {.importc:"ke_set_str", discardable, cdecl.}
   ## set a variable to string value and return the occurrence of the variable
 
 proc ke_set_real_func1*(ke: ptr kexpr_t; name: cstring;
@@ -92,14 +92,14 @@ proc clear*(e:Expr) {.inline.} =
   if e.ke != nil:
     ke_unset(e.ke)
 
-proc `[]=`*(e:Expr, k:string, val:int or int32 or int64 or int8 or uint or uint8 or uint16 or uint32): cint {.inline, discardable.} =
-  return ke_set_int(e.ke, k, cint(val))
+proc `[]=`*(e:Expr, k:string, val:int or int32 or int64 or int8 or uint or uint8 or uint16 or uint32) {.inline.} =
+  ke_set_int(e.ke, k, cint(val))
 
-proc `[]=`*(e:Expr, k:string, val:float or float32 or float64): cint {.inline, discardable.} =
-  return ke_set_real(e.ke, k, cdouble(val))
+proc `[]=`*(e:Expr, k:string, val:float or float32 or float64) {.inline.} =
+  ke_set_real(e.ke, k, cdouble(val))
 
-proc `[]=`*(e:Expr, k:string, val:string): cint {.inline, discardable.} =
-  return ke_set_str(e.ke, k, val)
+proc `[]=`*(e:Expr, k:string, val:string) {.inline.} =
+  ke_set_str(e.ke, k, val)
 
 converter toInt*(e: Expr): int {.inline.} =
   ## evaluate the epression and interpret the result as an int.
