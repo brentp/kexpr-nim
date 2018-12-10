@@ -5,7 +5,6 @@ const
   TestCases = [
     ("1", 1.0),
     ("1 ", 1.0),
-    ("pi", 3.14159),
 
     ("2+1", 2+1.0),
     ("(((2+(1))))", 2 + 1.0),
@@ -34,7 +33,7 @@ const
     ("20 > 10", 1.0)
   ]
 
-proc `~=`(a, b: float): bool = 
+proc `~=`(a, b: float): bool =
   ## Checks if difference between two floats is less than 0.0001
   abs(a - b) < 1e-2
 
@@ -42,7 +41,7 @@ suite "Eval test cases":
   for data in TestCases:
     let (expr, expected) = data
     var e = expression(expr)
-    discard ke_set_default_func(e.ke);
+    echo ke_set_default_func(e.ke)
     check e.error() == 0
     echo expr, " got:", e.get_float, " expected:", expected, " ", e.get_float ~= expected
     check e.get_float() ~= expected
@@ -57,4 +56,7 @@ suite "Eval test cases":
   check (not e.get_bool())
 
 
-  quit(0)
+  test "expression strings":
+    e = expression("sval > aa22")
+    e["sval"] = "asdf"
+    echo e.get_float

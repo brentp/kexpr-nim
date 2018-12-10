@@ -5,7 +5,7 @@ import tables
 
 type
   kexpr_s {.bycopy.} = object
-  
+
   kexpr_t* = kexpr_s
 
 const
@@ -66,8 +66,8 @@ proc ke_eval_real*(ke: ptr kexpr_t; err: ptr cint): cdouble {.importc:"ke_eval_r
 proc ke_print*(ke: ptr kexpr_t) {.importc:"ke_print", cdecl.}
   ##  print the expression in Reverse Polish notation (RPN)
 
-type 
-  Expr* = ref object of RootObj
+type
+  Expr* = ref object
     ## Expr is a math expression
     ke*: ptr kexpr_t
     err: cint
@@ -86,79 +86,30 @@ proc expression*(s: string): Expr =
 proc error*(e:Expr): int {.inline.} =
   ## check the error value of the expression. non-zero values are errors.
   return int(e.err)
- 
+
 proc clear*(e:Expr) {.inline.} =
   ## clear the error state and empty the expression.
   e.err = 0
   if e.ke != nil:
     ke_unset(e.ke)
 
+proc `[]=`*(e:Expr, k:string, val:int or int32 or int64 or int8 or uint): cint {.inline, discardable.} =
+  return ke_set_int(e.ke, k, cint(val))
 
-proc set_int_vars*(e:Expr, vars:TableRef[string, int]=nil) {.inline.} =
-  ## set a number of int varaibles. to set a single value, user
-  ## ks_set_int(e.ke, "name", cint(value))
-  if vars == nil: return
-  for k, v in vars:
-    discard ke_set_int(e.ke, k, cint(v))
+proc `[]=`*(e:Expr, k:string, val:float or float32 or float64): cint {.inline, discardable.} =
+  return ke_set_real(e.ke, k, cdouble(val))
 
-proc get_int*(e: Expr, vars: TableRef[string, int] = nil): int =
+proc `[]=`*(e:Expr, k:string, val:string): cint {.inline, discardable.} =
+  return ke_set_str(e.ke, k, val)
+
+proc get_int*(e: Expr): int {.inline.} =
   ## evaluate the epression and interpret the result as an int.
-  e.set_int_vars(vars)
   return int(ke_eval_int(e.ke, e.err.addr))
 
 proc get_bool*(e: Expr): bool {.inline.} =
   ## evaluate the epression and interpret the result as a bool
   return abs(ke_eval_real(e.ke, e.err.addr)) > 1e-8
 
-proc set_float_vars*(e:Expr, vars:TableRef[string, float]=nil) {.inline.} =
-  ## set a number of float varaibles. to set a single value, user
-  ## ks_set_float(e.ke, "name", cdouble(value))
-  if vars == nil: return
-  for k, v in vars:
-    discard ke_set_real(e.ke, k, cdouble(v))
-
-proc get_float*(e: Expr, vars: TableRef[string, float] = nil): float =
+proc get_float*(e: Expr): float {.inline.} =
   ## evaluate the expression and interpret the result as a bool.
-  e.set_float_vars(vars)
   return float(ke_eval_real(e.ke, e.err.addr))
-
-when isMainModule:
-  import os
-  import strutils
-  var args = commandLineParams()
-  var err = cint(0)
-  if len(args) > 0:
-    var e = expression(args[0])
-    if err.int != 0:
-      stderr.write_line "error parsing expression"
-      quit(err.int)
-    echo e.get_float()
-    if err.int != 0:
-      stderr.write_line "error evaluating expression"
-    quit(err.int)
-
-  var ke = ke_parse("5*6+x", err.addr)
-  discard ke_set_real(ke, "x", 2.0)
-  echo ke_eval_real(ke, err.addr)
-  ke_destroy(ke)
-
-  var e = expression("5*6+x > 20")
-  echo e.get_int({"x": 10}.newTable)
-  echo e.get_int({"x": -20}.newTable)
-  assert e.error() == 0
-
-  e = expression("(value > 0)")
-  echo e.get_int({"value": 20}.newTable)
-  quit()
-
-  e = expression("5.5*6.7+a/b")
-  echo e.get_float({"x": 12.0, "b": 65.5}.newTable)
-
-  e = expression("(sample1 > 20 & sample2 > 10 & sample3 < 40")
-  # missing paren
-  assert e.error() != 0
-  e.clear()
-
-  e = expression("(sample1 > 20) & (sample2 > 10) & (sample3 < 40)")
-  echo e.get_int({"sample1": 21, "sample2": 65, "sample3": 20}.newTable)
-  echo e.get_bool()
