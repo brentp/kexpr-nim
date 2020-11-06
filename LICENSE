@@ -1,6 +1,17 @@
-MIT License
+Files: *
+Copyright: 2017-2020 Brent Pedersen <@brentp>
+License: MIT License
 
-Copyright (c) 2017 Brent Pedersen
+Files: kexpr/kexpr-c.c
+       kexpr/kexpr-c.h
+Copyright: 2015-2020 Heng Li <@lh3>
+       as distributed via
+         https://github.com/attractivechaos/
+       and copyright stated on
+         https://attractivechaos.github.io/klib/#About
+License: MIT/X11 License
+
+MIT License:
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -19,3 +30,8 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+MIT/X11 License:
+
+This license is the same as the MIT License with following additional clause:
+Except as contained in this notice, the name(s) of the above copyright holders shall not be used in advertising or otherwise to promote the sale, use or other dealings in this Software without prior written authorization.
